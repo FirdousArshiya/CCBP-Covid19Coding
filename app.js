@@ -24,7 +24,7 @@ const initializeDbAndServer = async () => {
       console.log("Server Running at http://localhost:3000/")
     );
   } catch (error) {
-    console.log(DB Error: ${error.message});
+    console.log(`DB Error: ${error.message}`);
     process.exit(1);
   }
 };
@@ -74,7 +74,7 @@ function authenticateToken(request, response, next) {
 
 app.post("/login/", async (request, response) => {
   const { username, password } = request.body;
-  const selectUserQuery = SELECT * FROM user WHERE username = '${username}';;
+  const selectUserQuery = `SELECT * FROM user WHERE username = '${username}';`;
   const dbUser = await databse.get(selectUserQuery);
 
   if (dbUser === undefined) {
